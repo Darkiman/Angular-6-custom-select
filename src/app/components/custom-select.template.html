@@ -1,0 +1,18 @@
+<span class="label"> {{ label }} </span>
+<div class="select-container" [class.disabled]="isDisabled">
+  <div class="menu-wrapper"
+    [matMenuTriggerFor]="menu">
+    <span>{{selected ? getSelected() : 'Ничего не выбрано'}}</span>
+    <mat-icon svgIcon="arrow-xs">
+    </mat-icon>
+  </div>
+  <mat-menu class="menu-select {{classes}}" #menu="matMenu">
+    <option
+      *ngFor="let item of options"
+      class="select-item"
+      [class.selected]="isSelected(item)"
+      [class.disabled]="item.isDisabled"
+      [disabled]="item.isDisabled"
+      (click)="selectItem($event, item)">{{item.title}}</option>
+  </mat-menu>
+</div>

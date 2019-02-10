@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+@import '/app/styles/colors.scss';
+
+.select-item {
+  width: 100%;
+  padding: 5px 0px;
+  cursor: pointer;
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: var(--blue);
+    color: white;
+    border-color: var(--blue);
+  }
+
+  &.selected {
+    background-color: var(--blue);
+    color: white;
+    border-color: var(--blue);
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+.mat-menu-panel {
+  margin-top: 8px;
+}
+
+.mat-menu-panel .mat-menu-content:not(:empty) {
+  padding-top: 2px;
+  padding-bottom: 0px;
+}

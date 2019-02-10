@@ -1,0 +1,79 @@
+@import '../styles/colors.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-container {
+  cursor: pointer;
+  display: flex;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px 0 rgba(158, 178, 207, 0.08);
+  background-color: #ffffff;
+  border: solid 1px #d4dee4;
+  transition: 0.3s all;
+  min-height: 40px;
+
+  &:hover {
+    box-shadow: 0 0 13px 0 rgba(72, 98, 109, 0.29) !important;
+    border-color: #a1b2bb !important;
+  }
+
+  &.disabled {
+  }
+}
+
+.label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  padding: 7px 0px;
+  position: relative;
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & > option {
+    font-family: 'Nunito Sans', 'Open Sans', sans-serif;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+  }
+}
+
+.menu-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  & > span {
+    margin-left: 10px;
+  }
+}
+
+mat-icon {
+  transform: rotate(90deg);
+  width: 0.6em;
+  height: 0.6em;
+  margin-right: 10px;
+
+  & /deep/ svg {
+    & > g {
+      & /deep/ path {
+        fill: #d4dee4;
+      }
+    }
+  }
+}
+
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
