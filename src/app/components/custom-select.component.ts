@@ -59,8 +59,7 @@ export class CustomSelectComponent implements ControlValueAccessor, OnChanges {
     if (this.multiselect) {
       if (Array.isArray(value)) {
         this.selected = value;
-      }
-      if (value) {
+      } else if (value) {
         this.selected = [value];
       }
     } else {
@@ -126,8 +125,13 @@ export class CustomSelectComponent implements ControlValueAccessor, OnChanges {
   getSelected() {
     if (this.multiselect) {
       if (this.selected && this.selected[0]) {
-        if ((this.selected as Array<any>).length > 1) {
-          return this.selected[0].title + '...';
+        const asArray = (this.selected as Array<any>);
+        if (asArray.length > 1) {
+          let result = '';
+          asArray.map((item, i) => {
+            i !== asArray.length - 1 ? result += item.title + ', ' : result += item.title;
+          });
+          return result;
         }
         return this.selected[0].title;
       } else {
