@@ -3,15 +3,15 @@ import { SelectMenuItem } from './types/selectMenuItem';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataService } from './services/data.service';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {LongNamePipe} from "./pipes/long-name.pipe";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [DataService]
+  providers: [DataService, LongNamePipe]
 })
 export class AppComponent {
-
   @Output() formChanged: EventEmitter<any> = new EventEmitter();
 
   title = 'custom-select';
@@ -22,9 +22,9 @@ export class AppComponent {
   nullValue: undefined;
 
   options = Array<SelectMenuItem>(
-    { value: 1, title: 'Ford' },
-    { value: 2, title: 'Kia' },
-    { value: 3, title: 'BMW', isDisabled: true }
+    { value: null, title: 'Ford' },
+    { value: {}, title: 'Kia' },
+    { value: Infinity, title: 'BMW' }
   );
 
   brandOptions  = [];
@@ -32,7 +32,7 @@ export class AppComponent {
   yearOptions = [];
   generationOptions = [];
 
-  constructor(fb: FormBuilder, private dataService: DataService) {
+  constructor(fb: FormBuilder, private dataService: DataService, private longNamePipe: LongNamePipe) {
     this.form = fb.group({
       fullAutoName: '',
       brand: null,
@@ -103,7 +103,7 @@ export class AppComponent {
   }
 
   setFullName() {
-    const result = `${this.form.value.brand ? this.form.value.brand.title : ''}${this.form.value.model ? ' ' + this.form.value.model.title : ''}${this.form.value.generation ? ' ' + this.form.value.generation.title : ''}`;
+    const result = this.longNamePipe.transform(this.form.value, ['brand', 'model', 'generation'], 'title');
     this.form.patchValue({fullAutoName: result}, {emitEvent: false});
   }
 }

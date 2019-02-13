@@ -24,8 +24,8 @@ export class CustomSelectComponent implements ControlValueAccessor, OnChanges {
   @Input() selected: SelectMenuItem | Array<any>;
   @Input() classes: string;
 
-  @Output() onChange: any;
-  @Output() onTouched: any;
+  onChange: any;
+  onTouched: any;
 
   isDisabled: boolean;
   readonly nothingSelected = 'Ничего не выбрано';
@@ -127,11 +127,7 @@ export class CustomSelectComponent implements ControlValueAccessor, OnChanges {
       if (this.selected && this.selected[0]) {
         const asArray = (this.selected as Array<any>);
         if (asArray.length > 1) {
-          let result = '';
-          asArray.map((item, i) => {
-            i !== asArray.length - 1 ? result += item.title + ', ' : result += item.title;
-          });
-          return result;
+          return asArray.map(item => item.title ? item.title : '' ).join(', ');
         }
         return this.selected[0].title;
       } else {
@@ -143,6 +139,14 @@ export class CustomSelectComponent implements ControlValueAccessor, OnChanges {
       } else {
         return this.nothingSelected;
       }
+    }
+  }
+
+  trackByFunction(item: SelectMenuItem) {
+    if (!item) {
+      return null;
+    } else {
+      return item.value;
     }
   }
 }

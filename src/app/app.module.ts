@@ -13,11 +13,13 @@ import {
 import { IconInjectorService } from './services/icon-injector.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LongNamePipe } from './pipes/long-name.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomSelectComponent
+    CustomSelectComponent,
+    LongNamePipe
   ],
   imports: [
     BrowserModule,

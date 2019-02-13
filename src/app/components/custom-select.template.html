@@ -8,7 +8,7 @@
   </div>
   <mat-menu class="menu-select {{classes}}" #menu="matMenu">
     <option
-      *ngFor="let item of options"
+      *ngFor="let item of options; trackBy:trackByFunction"
       class="select-item"
       [class.selected]="isSelected(item)"
       [class.disabled]="item.isDisabled"
